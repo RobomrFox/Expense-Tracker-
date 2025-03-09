@@ -2,7 +2,7 @@ const Sidebar = function () {
 
     return(
     <>
-        <div className="w-[20rem] bg-purple-50 h-screen"> 
+        <div className="w-[20rem] bg-purple-50 h-screen relative z-10"> 
             
             <div className="flex flex-col my-auto h-full">
                 <button>
