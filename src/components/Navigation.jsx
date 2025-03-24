@@ -2,10 +2,11 @@
 
 
 function Navigation() {
+    console.log("Navigaion is Wroking!")
     return(
         <>
-            <div className="w-full h-[3rem] bg-amber-50 relative z-1">
-                
+            <div className="h-[3rem] bg-amber-50 relative z-[100]">
+                😒
             </div>
         </>
     )
