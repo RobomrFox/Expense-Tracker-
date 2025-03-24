@@ -20,8 +20,6 @@ function App() {
   return (
     <div>
       <Topbar/>
-      <ExpenseRecords/>
-      <Sidebar/>
     </div>
   )
 }
