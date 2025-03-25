@@ -3,7 +3,6 @@ import { useState } from "react";
 const Sidebar = function () {
 
     const [isCollapsed, setIsCollapsed] = useState(false);
-    const [isActive, setIsActive] = useState(false);
     const name = "Avi";
 
 
