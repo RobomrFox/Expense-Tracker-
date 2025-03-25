@@ -1,6 +1,6 @@
 function AddCategory() {
     return (
-        <div className="min-h-50 max-w-80 mx-auto my-auto rounded-lg border-2 border-neutral-300 font-mono text-center">
+        <div className="fixed mx-auto my-50 min-h-50 max-w-80 rounded-lg border-2 border-neutral-300 font-mono text-center">
             <div className="py-8 font-bold"><label>ADD CATEGORY</label></div>
             <div className=""><label>Name</label></div>
             <div className="pb-5"><input className="border-1 border-neutral-500"></input></div>
