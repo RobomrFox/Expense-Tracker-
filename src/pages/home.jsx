@@ -1,5 +1,5 @@
 import { useLoaderData } from "react-router-dom";
-import { fetchData } from "../components/helper/helper";
+import { fetchData } from "../helper/helper";
 
 export function homeLoader() {
     const userName  = fetchData("userName");
