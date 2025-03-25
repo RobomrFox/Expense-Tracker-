@@ -20,8 +20,11 @@ const Sidebar = function () {
                         <span>Tracks</span>
                     </div>
 
-                    <button className={` ${isCollapsed ? "" : "ml-auto"} hover:bg-purple-500/10 rounded cursor-pointer`} onClick={() => setIsCollapsed(prevState => !prevState)}>
-                        <svg width="40" clipRule="evenodd" fillRule="evenodd" strokeLinejoin="round" stroke-miterlimit="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m4 3c-.478 0-1 .379-1 1v16c0 .62.519 1 1 1h16c.621 0 1-.52 1-1v-16c0-.478-.379-1-1-1zm15.5 1.5v15h-4v-15zm-15 15v-15h9.5v15zm6.342-3.679c.137.124.299.179.458.179.358 0 .7-.284.7-.705v-6.59c0-.422-.342-.705-.7-.705-.159 0-.321.055-.458.178-1.089.982-2.684 2.417-3.576 3.22-.17.153-.266.371-.266.601 0 .229.096.448.265.601.893.803 2.487 2.239 3.577 3.221zm-.342-5.317v2.991l-1.66-1.496z" fillRule="nonzero" /></svg>
+                    <button className={` ${isCollapsed ? "" : "ml-auto"} hover:bg-purple-500/10 rounded cursor-pointer`} onClick={() => {
+                        setIsCollapsed(prevState => !prevState);
+
+                        }}>
+                        <svg className={`${isCollapsed ? "rotate-180" : " " } transition-transform duration-200`}  width="40" clipRule="evenodd" fillRule="evenodd" strokeLinejoin="round" stroke-miterlimit="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m4 3c-.478 0-1 .379-1 1v16c0 .62.519 1 1 1h16c.621 0 1-.52 1-1v-16c0-.478-.379-1-1-1zm15.5 1.5v15h-4v-15zm-15 15v-15h9.5v15zm6.342-3.679c.137.124.299.179.458.179.358 0 .7-.284.7-.705v-6.59c0-.422-.342-.705-.7-.705-.159 0-.321.055-.458.178-1.089.982-2.684 2.417-3.576 3.22-.17.153-.266.371-.266.601 0 .229.096.448.265.601.893.803 2.487 2.239 3.577 3.221zm-.342-5.317v2.991l-1.66-1.496z" fillRule="nonzero" /></svg>
                     </button>
                 </div>
 
@@ -60,7 +63,7 @@ const Sidebar = function () {
                         {!isCollapsed && <span>Reports</span>}
                     </div>
 
-                    <hr className="my-2 border-purple-800" />
+                    <hr className="my-2 border-purple-800/20" />
 
                     <div className={`flex items-center ${isCollapsed ? "justify-center" : "justify-start"} gap-2 hover:bg-purple-500/10 rounded p-1 cursor-pointer`}>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
