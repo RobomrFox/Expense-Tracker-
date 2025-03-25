@@ -1,1 +1,7 @@
 @import "tailwindcss";
+
+:root {
+    --color-desktop: #2563eb;
+    --color-mobile: #60a5fa;
+  }
+  
