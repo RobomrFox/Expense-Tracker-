@@ -1,3 +1,5 @@
+import Modal from 'react-bootstrap/Login'
+
 function AddCategory() {
     return (
         <div className="fixed mx-auto my-50 min-h-50 max-w-80 rounded-lg border-2 border-neutral-300 font-mono text-center">
