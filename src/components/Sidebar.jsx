@@ -17,7 +17,7 @@ const Sidebar = function () {
 
                         <svg width="40" clipRule="evenodd" fillRule="evenodd" strokeLinejoin="round" stroke-miterlimit="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m22 8c0-.478-.379-1-1-1h-13c-.62 0-1 .519-1 1v13c0 .621.52 1 1 1h13c.478 0 1-.379 1-1zm-13.5.5h12v12h-12zm-2.5-2.5h13.25c.414 0 .75-.336.75-.75s-.336-.75-.75-.75h-13.75c-.53 0-1 .47-1 1v13.75c0 .414.336.75.75.75s.75-.336.75-.75zm-2.5-2.5h13.75c.414 0 .75-.336.75-.75s-.336-.75-.75-.75h-14.25c-.53 0-1 .47-1 1v14.25c0 .414.336.75.75.75s.75-.336.75-.75z" fillRule="nonzero" /></svg>
 
-                        <span>Tracks</span>
+                        <span className="text-xl">Expense</span>
                     </div>
 
                     <button className={` ${isCollapsed ? "" : "ml-auto"} hover:bg-purple-500/10 rounded cursor-pointer`} onClick={() => {
@@ -33,7 +33,7 @@ const Sidebar = function () {
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="size-6">
                             <path stroke-linecap="round" strokeLinejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
                         </svg>
-                        {!isCollapsed && <span>Home</span>}
+                        {!isCollapsed && <span className="text-xl">Home</span>}
                     </div>
 
                     <div className={`flex items-center ${isCollapsed ? "justify-center" : "justify-start"} gap-2 hover:bg-purple-500/10 rounded p-1 cursor-pointer`}>
@@ -42,7 +42,7 @@ const Sidebar = function () {
                             <path strokeLinecap="round" strokeLinejoin="round" d="M6 6h.008v.008H6V6Z" />
                         </svg>
 
-                        {!isCollapsed && <span>Categories</span>}
+                        {!isCollapsed && <span className="text-xl">Categories</span>}
                     </div>
 
                     <div className={`flex items-center ${isCollapsed ? "justify-center" : "justify-start"} gap-2 hover:bg-purple-500/10 rounded p-1 cursor-pointer`}>
@@ -52,7 +52,7 @@ const Sidebar = function () {
                         </svg>
 
 
-                        {!isCollapsed && <span>Budget</span>}
+                        {!isCollapsed && <span className="text-xl">Budget</span>}
                     </div>
 
                     <div className={`flex items-center ${isCollapsed ? "justify-center" : "justify-start"} gap-2 hover:bg-purple-500/10 rounded p-1 cursor-pointer`}>
@@ -60,7 +60,7 @@ const Sidebar = function () {
                             <path strokeLinecap="round" strokeLinejoin="round" d="m9 13.5 3 3m0 0 3-3m-3 3v-6m1.06-4.19-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z" />
                         </svg>
 
-                        {!isCollapsed && <span>Reports</span>}
+                        {!isCollapsed && <span className="text-xl">Reports</span>}
                     </div>
 
                     <hr className="my-2 border-purple-800/20" />
@@ -71,14 +71,14 @@ const Sidebar = function () {
                         </svg>
 
 
-                        {!isCollapsed && <span>Settings</span>}
+                        {!isCollapsed && <span className="text-xl">Settings</span>}
                     </div>
                 </nav>
 
                 <div className="mx-auto p-1 mb-4">
                     <div className="flex items-center gap-4">
-                        <div className="aspect-square max-w-17 rounded-full border flex justify-center items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-17">
+                        <div className="aspect-square max-w-18 rounded-full border flex justify-center items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-10">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
                             </svg>
                         </div>
