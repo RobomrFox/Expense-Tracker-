@@ -1,11 +1,17 @@
-function AddCategory() {
-
+function AddCategory({ closeAddCatModal }) {
+    function bgClickCloseModal(e) {
+        if (e.target.id === "modal-bg") {
+            closeAddCatModal();
+        }
+    }
     return (
-        <dialog id="addCategoryModal" className="min-h-50 max-w-80 mx-auto my-auto rounded-xl font-mono text-center">
-                <div className="py-5 mb-5 font-bold">
+        <div id="modal-bg" className="absolute top-0 left-0 w-screen h-screen font-mono text-center bg-zinc-700/50 flex flex-col
+        justify-center items-center" onClick={bgClickCloseModal}>
+            <div className="bg-white rounded-lg">
+                <div className="py-5 font-bold">
                     <label>ADD CATEGORY</label>
                 </div>
-                 <div>
+                <div>
                     <div>
                         <label>Name</label>
                     </div>
@@ -14,12 +20,13 @@ function AddCategory() {
                     </div>
                 </div>
                 <div className="py-5">
-                    <form method="dialog" className="space-x-5">
-                        <button className="btn min-w-20">BACK</button>
-                        <button className="btn bg-blue-500 text-white rounded-xl min-w-20">CREATE</button>
-                    </form>
+                    <div className="space-x-5">
+                        <button className="min-w-20" onClick={closeAddCatModal}>BACK</button>
+                        <button className="bg-blue-500 text-white rounded-xl min-w-20" onClick={closeAddCatModal}>CREATE</button>
+                    </div>
                 </div>
-            </dialog>
+            </div>
+        </div>
     )
 }
 export default AddCategory;
