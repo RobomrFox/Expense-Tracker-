@@ -1,5 +1,6 @@
 import express from 'express';
-import User from '../db';
+import User from '../db.js';
+import bcrypt from 'bcrypt';
 
 const router = express.Router();
 
@@ -18,7 +19,7 @@ router.post("/register", async (req, res) => {
         username
     })
 
-    const existingEmail = await User.fineOne({
+    const existingEmail = await User.findOne({
         email
     })
 
@@ -34,6 +35,32 @@ router.post("/register", async (req, res) => {
         })
     }
 
+    //Hasing Password
+    const salt = await bcrypt.genSalt(10);
 
-    
+    const hashedPassword = await bcrypt.hash(password, salt);
+
+    //Registering New User in DB
+    const newUser = User({
+        username,
+        email,
+        password: hashedPassword
+    });
+
+    const savedUser = await newUser.save();
+
+    //New Session
+    req.session.user = {
+        id: savedUser._id,
+        username: savedUser.username,
+        email: savedUser.email
+    }
+
+    res.status(201).json({
+        message: "User registered and logged in successfully!"
+    })
+
 })
+
+
+export default router;
