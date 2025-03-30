@@ -1,11 +1,14 @@
 
 import { createBrowserRouter, useLoaderData } from "react-router-dom";
 import { Outlet } from "react-router-dom";
-import { Home } from "./pages/home";
+import { Home } from "./pages/Home";
 import Sidebar from "./components/Sidebar";
 import Topbar from "./components/Topbar";
 import Error from "./pages/Error";
 import { expenseLoader } from "./helper/ExpenseLoader";
+import ExpenseRecords from "./components/ExpenseRecords";
+import LoginPage from "./pages/Login";
+import RegisterPage from './pages/Register';
 
 //Layout for permanent Sidebar
 const Layout = () => {
@@ -17,6 +20,7 @@ const Layout = () => {
       <Sidebar />
       <div className="main-content flex-grow p-4">
         <Outlet context={{expenseData}}/>
+        
       </div>
     </div>
   );
@@ -24,6 +28,14 @@ const Layout = () => {
 
 
 const router = createBrowserRouter([
+  {
+    path: "/login",
+    element: <LoginPage />,
+  },
+  {
+    path: "/register",
+    element: <RegisterPage />,
+  },
   {
     path: "/",
     element: <Layout />,
