@@ -60,6 +60,54 @@ router.post("/register", async (req, res) => {
         message: "User registered and logged in successfully!"
     })
 
+});
+
+
+router.post("/login", async (req, res) => {
+    const { email, password } = req.body;
+
+    if (!email) {
+        res.status(400).json({
+            error: "Email Field is Empty."
+        });
+    }
+
+    if (!password) {
+        res.status(400).json({
+            error: "Password Field is Empty."
+        });
+    }
+
+    //User Exist Checks
+    const existingUser = await User.findOne({ email });
+
+
+    if (existingUser) {
+        const storedPassword = existingUser.password;
+
+        const passwordMatch = await bcrypt.compare(password, storedPassword);
+
+        if (passwordMatch) {
+            req.session.user = {
+                id: existingUser._id,
+                username: existingUser.username,
+                email: existingUser.email
+            }
+
+            res.json({
+                msg: "You're Logged In Now."
+            })
+        } else {
+            res.status(401).json({
+                error: "Password Isn't Correct!"
+            })
+        }
+    } else {
+        res.status(400).json({
+            error: "No User with this Email. Please Register Now!"
+        })
+    }
+
 })
 
 
