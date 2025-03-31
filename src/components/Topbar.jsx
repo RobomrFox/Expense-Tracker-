@@ -1,7 +1,7 @@
 import { useState } from "react";
-import AddCategory from "./AddCategory";
+import AddCategory from "../form/AddCategory";
 import AddExpense from "../form/AddExpense";
-import DeleteCategory from "./DeleteCategory";
+import DeleteCategory from "../form/DeleteCategory";
 
 function Topbar() {
     const [checkAddCatModal, toggleAddCatModal] = useState(false);

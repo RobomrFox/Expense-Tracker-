@@ -1,10 +1,14 @@
+import Settings from "./Settings";
 import { useState } from "react";
 
 const Sidebar = function () {
-
+    const [checkSettingsModal, toggleSettingsModal] = useState(false);
     const [isCollapsed, setIsCollapsed] = useState(false);
     const name = "Avi";
 
+    function closeToggleSettingsModal() {
+        toggleSettingsModal(false);
+    }
 
     return (
         <>
@@ -70,7 +74,8 @@ const Sidebar = function () {
                         </svg>
 
 
-                        {!isCollapsed && <span className="text-xl">Settings</span>}
+                        {!isCollapsed && <button className="text-xl" onClick={() => toggleSettingsModal(true)}>Settings</button>}
+                        {checkSettingsModal && <Settings closeToggleSettingsModal={closeToggleSettingsModal}/>}
                     </div>
                 </nav>
 

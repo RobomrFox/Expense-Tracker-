@@ -2,6 +2,8 @@
 import { useOutletContext } from "react-router-dom";
 import AddExpense from "../form/AddExpense";
 import ExpenseChart from "@/helper/ExpenseChart";
+import ExpenseRecords from "@/components/ExpenseRecords";
+import Topbar from "@/components/Topbar";
 
 export function Home() {
     // Retrieve the expense data from the parent route's Outlet context.
@@ -16,6 +18,7 @@ export function Home() {
 
     return (
         <>
+            <div><Topbar/></div>
             <div className="mt-20 mx-auto px-4 max-w-[1300px]">
                 <div className="flex flex-col gap-2 lg:flex-row mx-auto">
                     <div className="flex-1 min-w-[350px]">
@@ -27,6 +30,9 @@ export function Home() {
                     <div className="flex-1 mt-4 mr-6 min-w-[560px]">
                         <ExpenseChart expenseData={expenseData} />
                     </div>
+                </div>
+                <div className="mt-20">
+                    <ExpenseRecords/>
                 </div>
             </div>
 
