@@ -3,6 +3,7 @@ import session from 'express-session';
 import authRoutes from './routes/authentication.js'
 import cors from 'cors'
 import categoryRoutes from './routes/categories.js'
+import expenseRoutes from './routes/expenses.js'
 
 const app = express();
 
@@ -24,9 +25,9 @@ app.use(session({
   }
 }))
 
-app.use("/api/users", userRoutes);
 app.use("/auth/", authRoutes);
 app.use('/api/category', categoryRoutes);
+app.use('/api/expenses', expenseRoutes);
 
 
 app.listen(3000);

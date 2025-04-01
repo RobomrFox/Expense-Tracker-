@@ -1,5 +1,4 @@
 import express from 'express';
-
 import Category from '../models/Category.js'
 
 const router = express.Router();
@@ -25,9 +24,12 @@ router.post('/', async (req, res) => {
         amountToSave = numericAmount;
     }
 
+    if (!req.session || !req.session.user || !req.session.user.id) {
+        return res.status(401).json({ error: "Authentication required." });
+    }
     const userId = req.session.user.id;
 
-    const existingCategory = await Category.findOneby({
+    const existingCategory = await Category.findOne({
         name: name, userId: userId
     })
 
@@ -40,11 +42,7 @@ router.post('/', async (req, res) => {
 
         const newCategory = Category({
             name,
-            amount,
-            createdAt: {
-                type: Date,
-                default: Date.now()
-            },
+            amount: amountToSave,
             userId
         });
 
