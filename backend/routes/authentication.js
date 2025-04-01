@@ -1,5 +1,5 @@
 import express from 'express';
-import User from '../db.js';
+import User from '../models/Users.js';
 import bcrypt from 'bcrypt';
 
 const router = express.Router();
@@ -25,13 +25,13 @@ router.post("/register", async (req, res) => {
 
     if (existingUser) {
         return res.status(400).json({
-            erro: "UserName already in DB."
+            error: "UserName already Exisits."
         })
     }
 
     if (existingEmail) {
         return res.status(400).json({
-            erro: "User Already Exists."
+            error: "Email Already Exists."
         })
     }
 
@@ -67,13 +67,13 @@ router.post("/login", async (req, res) => {
     const { email, password } = req.body;
 
     if (!email) {
-        res.status(400).json({
+        return res.status(400).json({
             error: "Email Field is Empty."
         });
     }
 
     if (!password) {
-        res.status(400).json({
+        return res.status(400).json({
             error: "Password Field is Empty."
         });
     }
@@ -94,21 +94,37 @@ router.post("/login", async (req, res) => {
                 email: existingUser.email
             }
 
-            res.json({
+            return res.json({
                 msg: "You're Logged In Now."
             })
         } else {
-            res.status(401).json({
+            return res.status(401).json({
                 error: "Password Isn't Correct!"
             })
         }
     } else {
-        res.status(400).json({
+        return res.status(400).json({
             error: "No User with this Email. Please Register Now!"
         })
     }
 
-})
+});
+
+
+router.get('/status', async (req, res) => {
+
+    if (req.session.user) {
+        return res.json({
+            loggedIn: true,
+            user: req.session.user
+        });
+    } else {
+        return res.json({
+            loggedIn: false, 
+            user: null
+        })
+    }
+});
 
 
 export default router;

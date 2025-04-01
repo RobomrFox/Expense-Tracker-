@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const RegisterPage = () => {
     const [username, setUserName] = useState('');
@@ -11,30 +12,38 @@ const RegisterPage = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         console.log("form submitted");
-    
+
         const endpoint = 'http://localhost:3000/auth/register';
-    
+
         const userData = { username, email, password };
-    
+
         const fetchOptions = {
             method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(userData)
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(userData),
+            credentials: 'include'
         }
-    
-        const response = await fetch(endpoint, fetchOptions);
-    
-        const data = await response.json();
-    
-        console.log("Registeration successful:", data);
 
-        navigate("/");
+        const response = await fetch(endpoint, fetchOptions);
+
+        if (response.ok) {
+            const data = await response.json();
+            console.log("Registeration successful:", data);
+
+            toast.success("Registeration Successful! Now Logging In");
+            navigate("/");
+        } else {
+            const errorData = await response.json();
+
+            console.log("Registeration Failed: ", errorData);
+            toast.error(errorData.error || "Registeration Failed. Please Try Again.");
+        }
 
     }
 
     return (
         <div className="w-full h-screen flex justify-center items-center">
-            <div className="w-140 h-80 bg-orange-200/30 shadow-orange-300 shadow-[8px_8px_0px_0px] border">
+            <div className="w-140 h-84 bg-orange-200/30 shadow-orange-300 shadow-[8px_8px_0px_0px] border">
                 <h1 className="text-2xl text-center py-4">Register/Sign Up</h1>
 
                 <form onSubmit={handleSubmit}>
@@ -79,9 +88,6 @@ const RegisterPage = () => {
                     </div>
 
                     <div className="flex justify-around mt-8 w-[95%] mx-auto">
-                        <button className="border-orange-400/50 border shadow-orange-300 hover:shadow-[0_0_0_2px] transition-shadow duration-300 p-2 rounded-2xl">
-                            Register
-                        </button>
 
                         <Link to="/login">
                             <button className="border-orange-400/50 border shadow-orange-300 hover:shadow-[0_0_0_2px] transition-shadow duration-300 p-2 rounded-2xl">
@@ -89,8 +95,13 @@ const RegisterPage = () => {
                             </button>
                         </Link>
 
+                        <button className="border-orange-400/50 border shadow-orange-300 hover:shadow-[0_0_0_2px] transition-shadow duration-300 p-2 rounded-2xl">
+                            Register
+                        </button>
+
                     </div>
                 </form>
+                <h2 className='ml-16 mt-1'>Registered User? Log In</h2>
             </div>
         </div>
     );

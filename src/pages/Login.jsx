@@ -9,11 +9,11 @@ import { toast, ToastContainer } from 'react-toastify';
 
 const LoginPage = () => {
 
-    const [ email, setEmail ] = useState('');
-    const [ password, setPassword ] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const navigate = useNavigate();
 
-    async function  handleLogin(event) {
+    async function handleLogin(event) {
         event.preventDefault();
 
         const endpoint = 'http://localhost:3000/auth/login';
@@ -21,9 +21,10 @@ const LoginPage = () => {
         const userData = { email, password };
 
         const fetchOptions = {
-            method: 'POST', 
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(userData)
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(userData),
+            credentials: 'include'
         }
 
         const response = await fetch(endpoint, fetchOptions);
@@ -35,7 +36,7 @@ const LoginPage = () => {
         } else {
             const errorData = await response.json();
             console.log('Login Failed: ', errorData);
-            toast.error( errorData.error  || "Login Failed. Please Try Again!");
+            toast.error(errorData.error || "Login Failed. Please Try Again!");
         }
     }
 
@@ -47,30 +48,24 @@ const LoginPage = () => {
                 <form onSubmit={handleLogin}>
                     <div className="w-[90%] mx-auto mt-6 flex justify-between mb-4">
                         <label htmlFor="email" className="text-xl">User Email: </label>
-                        <input 
-                        value={email}
-                        onChange={(e) => {
-                            setEmail(e.target.value);
-                        }}
-                        className="focus:shadow-purple-400/50 focus:shadow text-xl border pl-1 focus:outline-none" id="email" type="text" />
+                        <input
+                            value={email}
+                            onChange={(e) => {
+                                setEmail(e.target.value);
+                            }}
+                            className="focus:shadow-purple-400/50 focus:shadow text-xl border pl-1 focus:outline-none" id="email" type="text" />
                     </div>
                     <div className="w-[90%] mx-auto flex justify-between">
                         <label htmlFor="password" className="text-xl">Enter Password: </label>
-                        <input 
-                        value={password}
-                        onChange={(e) => {
-                            setPassword(e.target.value);
-                        }} 
-                        className="focus:shadow-purple-400/50 focus:shadow text-xl border pl-1 focus:outline-none" id="password" type="text" />
+                        <input
+                            value={password}
+                            onChange={(e) => {
+                                setPassword(e.target.value);
+                            }}
+                            className="focus:shadow-purple-400/50 focus:shadow text-xl border pl-1 focus:outline-none" id="password" type="password" />
                     </div>
 
                     <div className="flex justify-around mt-8 w-[95%] mx-auto">
-                        <button className="border-purple-400/50 border shadow-purple-500
-             hover:shadow-[0_0_0_2px]
-             transition-shadow duration-300 p-2 rounded-2xl ">
-                            Submit
-                        </button>
-
 
                         <Link to="/register">
                             <button className="border-purple-400/50 border shadow-purple-500
@@ -80,10 +75,16 @@ const LoginPage = () => {
                             </button>
                         </Link>
 
+                        <button className="border-purple-400/50 border shadow-purple-500
+             hover:shadow-[0_0_0_2px]
+             transition-shadow duration-300 p-2 rounded-2xl ">
+                            Submit
+                        </button>
+
                     </div>
 
                 </form>
-
+                            <h2 className='ml-18 mt-1'>Register as new User</h2>
             </div>
         </div>
     )

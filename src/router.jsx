@@ -9,6 +9,7 @@ import { expenseLoader } from "./helper/ExpenseLoader";
 import ExpenseRecords from "./components/ExpenseRecords";
 import LoginPage from "./pages/Login";
 import RegisterPage from './pages/Register';
+import ProtectedRoutes from "./components/ProtectedRoutes";
 
 //Layout for permanent Sidebar
 const Layout = () => {
@@ -44,11 +45,11 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Home />,
-      },
-      {
-        path: "Categories",
-        element: <h1>Categories</h1>,
+        element: (
+        <ProtectedRoutes>
+            <Home />
+        </ProtectedRoutes>
+        )
       },
     ],
   },

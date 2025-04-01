@@ -4,6 +4,7 @@ import AddExpense from "../form/AddExpense";
 import ExpenseChart from "@/helper/ExpenseChart";
 import ExpenseRecords from "@/components/ExpenseRecords";
 import Topbar from "@/components/Topbar";
+import AddCategory from "@/form/AddCategory";
 
 export function Home() {
     // Retrieve the expense data from the parent route's Outlet context.
@@ -18,7 +19,6 @@ export function Home() {
 
     return (
         <>
-            <div><Topbar/></div>
             <div className="mt-20 mx-auto px-4 max-w-[1300px]">
                 <div className="flex flex-col gap-2 lg:flex-row mx-auto">
                     <div className="flex-1 min-w-[350px]">
@@ -32,9 +32,21 @@ export function Home() {
                     </div>
                 </div>
                 <div className="mt-20">
-                    <ExpenseRecords/>
+
                 </div>
             </div>
+
+            <div className="mr-4 ml-4 flex flex-row gap-4 justify-between max-w-[1200px] mx-auto">
+                
+                <div className="w-3/5">
+                    <AddExpense />
+                </div>
+                
+                <div className="w-2/5">
+                    <AddCategory />
+                </div>
+            </div>
+
 
         </>
     );
