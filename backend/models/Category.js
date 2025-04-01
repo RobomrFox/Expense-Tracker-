@@ -1,9 +1,10 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose'
 
-const expenseSchema = new mongoose.Schema({
+
+
+const categorySchema = new mongoose.Schema({
     name: String,
     amount: Number,
-    category: String,
     createdAt: {
         type: Date,
         default: Date.now
@@ -15,7 +16,7 @@ const expenseSchema = new mongoose.Schema({
 });
 
 
-const Expense = mongoose.modle('Expense', expenseSchema);
+const Category = mongoose.model('Category', categorySchema);
 
 
-export default Expense;
+export default Category;
