@@ -53,9 +53,21 @@ router.post('/', async (req, res) => {
         });
     }
 
-
-
 })
+
+
+router.get('/', async (req, res) => {
+    if (!req.session || !req.session.user || !req.session.user.id) {
+        return res.status(401).json({ error: "Authentication required." });
+    }
+    const userId = req.session.user.id;
+
+    const categories = await Category.find({ userId: userId })
+                                     .select('_id name amount')
+                                     .sort({ name: 1 });
+
+    return res.status(200).json(categories);
+});
 
 
 export default router;

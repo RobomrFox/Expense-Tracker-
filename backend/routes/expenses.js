@@ -38,4 +38,13 @@ router.post('/', async (req, res) => {
     });
 });
 
+router.get('/', async (req, res) => {
+    if (!req.session || !req.session.user || !req.session.user.id) {
+      return res.status(401).json({ error: "Authentication required." });
+    }
+    const userId = req.session.user.id;
+    const expenses = await Expense.find({ userId }).sort({ createdAt: -1 });
+    return res.status(200).json(expenses);
+});
+
 export default router;
