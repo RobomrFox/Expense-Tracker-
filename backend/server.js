@@ -2,7 +2,7 @@ import express from "express";
 import session from 'express-session';
 import authRoutes from './routes/authentication.js'
 import cors from 'cors'
-import userRoutes from './routes/users.js'
+import categoryRoutes from './routes/categories.js'
 
 const app = express();
 
@@ -26,6 +26,7 @@ app.use(session({
 
 app.use("/api/users", userRoutes);
 app.use("/auth/", authRoutes);
+app.use('/api/category', categoryRoutes);
 
 
 app.listen(3000);

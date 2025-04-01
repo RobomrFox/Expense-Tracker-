@@ -5,23 +5,30 @@ import Category from '../models/Category.js'
 const router = express.Router();
 
 
-router.post('/category', async (req, res) => {
+router.post('/', async (req, res) => {
     const { name, amount } = req.body;
 
-    if(!name) {
+    if (!name) {
         return res.status(401).json({
             error: "Name Field can not be Empty"
         });
     }
 
-    if (amount < 0 || !typeof(amount) === 'number') {
-        return res.status(401).json({
-            error: "Amount can not be Negative."
-        })
+    let amountToSave = null;
+    if (amount !== undefined && amount !== null && amount !== "") {
+        const numericAmount = Number(amount);
+        if (isNaN(numericAmount) || numericAmount < 0) {
+            return res
+                .status(400)
+                .json({ error: "Amount must be a Positive Number." });
+        }
+        amountToSave = numericAmount;
     }
 
+    const userId = req.session.user.id;
+
     const existingCategory = await Category.findOneby({
-        name
+        name: name, userId: userId
     })
 
 
@@ -32,19 +39,25 @@ router.post('/category', async (req, res) => {
     } else {
 
         const newCategory = Category({
-            name, 
+            name,
             amount,
             createdAt: {
-                type: Date, 
+                type: Date,
                 default: Date.now()
-            }
+            },
+            userId
         });
 
-        const saveCategory = await newCategory.save();
+        await newCategory.save();
+
+        return res.json({
+            msg: "Successfully Created a Category."
+        });
     }
 
-    return res.json({
-        msg: "Successfully Created a Category."
-    })
+
 
 })
+
+
+export default router;
