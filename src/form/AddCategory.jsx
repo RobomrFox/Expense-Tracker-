@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { toast } from 'react-toastify';
 
-function AddCategory() {
+function AddCategory({onCategoriesAdded}) {
 
     const [name, setName] = useState('');
     const [amount, setAmount] = useState('');
@@ -43,6 +43,10 @@ function AddCategory() {
                 toast.success(responseData.msg || "New Category Added");
                 setName("");
                 setAmount("");
+
+                //Adding new Category to home
+                onCategoriesAdded();
+                
             } else {
                 toast.error(responseData.error || responseData.msg || "Action Failed. Try Again");
             }

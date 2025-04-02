@@ -12,7 +12,7 @@ const Sidebar = function () {
 
     return (
         <>
-            <aside className="bg-purple-200 border-r flex flex-col gap-10">
+            <aside className={`${isCollapsed ? "w-16" : "w-64"} bg-purple-200 border-r transition-all duration-300 flex flex-col justify-between h-full overflow-y-auto`}>
 
                 <div className="mt-4 mx-2 p-2 bg-purp-300/10 flex">
 

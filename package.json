@@ -8,7 +8,7 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "devStart": "nodemon server.js"
+    "devStart": "nodemon backend/server.js"
   },
   "dependencies": {
     "@radix-ui/react-tooltip": "^1.1.8",

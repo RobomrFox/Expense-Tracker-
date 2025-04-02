@@ -1,32 +1,26 @@
-
-import { createBrowserRouter, useLoaderData } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import { Outlet } from "react-router-dom";
 import { Home } from "./pages/Home";
 import Sidebar from "./components/Sidebar";
-import Topbar from "./components/Topbar";
 import Error from "./pages/Error";
-import { expenseLoader } from "./helper/ExpenseLoader";
 import ExpenseRecords from "./components/ExpenseRecords";
 import LoginPage from "./pages/Login";
 import RegisterPage from './pages/Register';
 import ProtectedRoutes from "./components/ProtectedRoutes";
 
-//Layout for permanent Sidebar
+// Layout for permanent Sidebar
 const Layout = () => {
-
-  const expenseData = useLoaderData();
-
   return (
-    <div className="flex h-screen">
-      <Sidebar />
-      <div className="main-content flex-grow p-4">
-        <Outlet context={{expenseData}}/>
-        
+    <div className="flex h-screen overflow-hidden">
+      <div className="sticky top-0 h-screen">
+        <Sidebar />
+      </div>
+      <div className="flex-1 overflow-auto p-4">
+        <Outlet />
       </div>
     </div>
   );
 };
-
 
 const router = createBrowserRouter([
   {
@@ -39,18 +33,19 @@ const router = createBrowserRouter([
   },
   {
     path: "/",
-    element: <Layout />,
+    element: <ProtectedRoutes><Layout /></ProtectedRoutes>,
     errorElement: <Error />,
-    loader: expenseLoader,
     children: [
       {
         index: true,
-        element: (
-        <ProtectedRoutes>
-            <Home />
-        </ProtectedRoutes>
-        )
+        element: <Home />
       },
+      // You can add additional child routes here if needed
+      // For example:
+      // {
+      //   path: "expenses",
+      //   element: <ExpenseRecords />
+      // }
     ],
   },
 ]);

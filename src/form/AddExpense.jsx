@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { toast } from 'react-toastify';
 
-function AddExpense() {
+function AddExpense( { categories, onExpenseAdded } ) {
     const [name, setName] = useState('');
     const [amount, setAmount] = useState('');
     const [category, setCategory] = useState('');
 
     async function handleAddExpenseForm(event) {
         event.preventDefault();
+
+        
 
         const trimmedName = name.trim();
         if (!trimmedName) {
@@ -57,6 +59,10 @@ function AddExpense() {
                 setName('');
                 setAmount('');
                 setCategory('');
+
+                //calling update on Expenses Table
+                onExpenseAdded();
+                
             } else {
                 toast.error(responseData.error || responseData.msg || "Failed to add expense.");
             }
@@ -120,8 +126,9 @@ function AddExpense() {
                         className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent bg-white appearance-none"
                     >
                         <option value="">Select Category</option>
-                        <option value="Food">Food (Hardcoded)</option>
-                        <option value="Transport">Transport (Hardcoded)</option>
+                        {categories.map((cat) => {
+                            return (<option key={cat._id} value={cat.name}>{cat.name}</option>)
+                        })}
                     </select>
                 </div>
                 <div>

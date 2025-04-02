@@ -1,21 +1,78 @@
-// src/pages/Home.jsx
 import { useOutletContext } from "react-router-dom";
 import AddExpense from "../form/AddExpense";
 import ExpenseChart from "@/helper/ExpenseChart";
-import ExpenseRecords from "@/components/ExpenseRecords";
-import Topbar from "@/components/Topbar";
 import AddCategory from "@/form/AddCategory";
+import { useEffect, useState } from "react";
+import { toast } from 'react-toastify';
+import MonthlyExpenseList from "@/form/MonthlyExpense";
+import { useCallback } from "react";
 
 export function Home() {
-    // Retrieve the expense data from the parent route's Outlet context.
-    const { expenseData } = useOutletContext();
+    const [availableCategories, setAvailableCategories] = useState([]);
+    const [expenseData, setExpenseData] = useState(null);
 
-    const userName = "Avi Pancholi"
 
-    // Optionally render a loading state if expenseData isn't available.
-    if (!expenseData) {
-        return <div>Loading...</div>;
-    }
+
+    const fetchExpenses = useCallback(async () => {
+
+        const res = await fetch("http://localhost:3000/api/expenses", {
+            credentials: "include",
+        });
+        if (res.ok) {
+            const data = await res.json();
+            setExpenseData(data);
+        } else {
+            toast.error("Failed to load expenses.");
+        }
+    }, [])
+
+
+    const fetchCategories = useCallback(async () => {
+        const endpoint = 'http://localhost:3000/api/category';
+        const fetchOptions = {
+            method: 'GET',
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json' }
+        };
+
+        try {
+            const response = await fetch(endpoint, fetchOptions);
+            if (response.ok) {
+                const data = await response.json();
+                setAvailableCategories(data);
+            } else {
+                const errorData = await response.json().catch(() => ({}));
+                toast.error(`Failed to load categories: ${errorData.error || response.statusText}`);
+            }
+        } catch (error) {
+            console.error("Network error fetching categories:", error);
+            toast.error("Network error fetching categories.");
+        }
+    }, [])
+
+    useEffect(() => {
+        fetchCategories();
+    }, [fetchCategories]);
+
+    const userName = "Avi Pancholi";
+
+    useEffect(() => {
+        fetchExpenses();
+    }, [fetchExpenses]);
+
+    const now = new Date();
+    const currentMonth = now.getMonth();
+    const currentYear = now.getFullYear();
+    const monthlyExpenses =
+        expenseData &&
+        expenseData.filter((exp) => {
+            if (!exp.createdAt) return false;
+            const d = new Date(exp.createdAt);
+            return d.getMonth() === currentMonth && d.getFullYear() === currentYear;
+        });
+
+    if (!expenseData) return <div>Loading...</div>;
+
 
     return (
         <>
@@ -37,17 +94,17 @@ export function Home() {
             </div>
 
             <div className="mr-4 ml-4 flex flex-row gap-4 justify-between max-w-[1200px] mx-auto">
-                
                 <div className="w-3/5">
-                    <AddExpense />
+                    <AddExpense categories={availableCategories} onExpenseAdded={fetchExpenses} />
+                </div>
+                <div className="w-2/5">
+                    <AddCategory onCategoriesAdded={fetchCategories} />
                 </div>
                 
-                <div className="w-2/5">
-                    <AddCategory />
-                </div>
             </div>
-
-
+            <div>
+                    <MonthlyExpenseList expenses={monthlyExpenses} onEditOrDelete={fetchExpenses}/>
+                </div>
         </>
     );
 }
