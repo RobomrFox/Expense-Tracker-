@@ -27,7 +27,7 @@ router.post('/', async (req, res) => {
     const newExpense = new Expense({
         name,
         amount: numericAmount,
-        category,
+        category: category,
         userId,
     });
 
