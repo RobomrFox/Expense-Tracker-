@@ -47,4 +47,32 @@ router.get('/', async (req, res) => {
     return res.status(200).json(expenses);
 });
 
+
+router.delete('/:id', async (req, res) => {
+    const expenseId = req.params.id;
+
+    if (!(req.session && req.session.user && req.session.user.id)) {
+        return res.status(401).json({ error: "Authentication required."});
+    }
+
+    const userId = req.session.user.id;
+
+    const deletedExpense = await Expense.findOneAndDelete({
+        _id: expenseId,
+        userId: userId
+    })
+
+    if(!deletedExpense) {
+        return res.status(401).json({
+            error: "Expense Not Found or Denied"
+        })
+    }
+
+
+    return res.status(200).json({
+        msg: `Expense '${deletedExpense}' deleted Successfully`,
+        name: `${deletedExpense.name}`
+    })
+})
+
 export default router;
