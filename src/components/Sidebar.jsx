@@ -16,7 +16,7 @@ const Sidebar = function () {
 
                 <div className="mt-4 mx-2 p-2 bg-purp-300/10 flex">
 
-                    <div className={`${isCollapsed ? "w-0" : "w-64"} gap-2 flex items-center transition-all flex overflow-hidden`}>
+                    <div className={`${isCollapsed ? "w-0" : "w-64"} gap-2 items-center transition-all flex overflow-hidden`}>
 
                         <svg width="40" clipRule="evenodd" fillRule="evenodd" strokeLinejoin="round" stroke-miterlimit="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m22 8c0-.478-.379-1-1-1h-13c-.62 0-1 .519-1 1v13c0 .621.52 1 1 1h13c.478 0 1-.379 1-1zm-13.5.5h12v12h-12zm-2.5-2.5h13.25c.414 0 .75-.336.75-.75s-.336-.75-.75-.75h-13.75c-.53 0-1 .47-1 1v13.75c0 .414.336.75.75.75s.75-.336.75-.75zm-2.5-2.5h13.75c.414 0 .75-.336.75-.75s-.336-.75-.75-.75h-14.25c-.53 0-1 .47-1 1v14.25c0 .414.336.75.75.75s.75-.336.75-.75z" fillRule="nonzero" /></svg>
 
