@@ -43,7 +43,7 @@ router.get('/', async (req, res) => {
       return res.status(401).json({ error: "Authentication required." });
     }
     const userId = req.session.user.id;
-    const expenses = await Expense.find({ userId }).sort({ createdAt: -1 });
+    const expenses = await Expense.find({ userId }).sort({ createdAt: -1 }); //
     return res.status(200).json(expenses);
 });
 

@@ -106,7 +106,7 @@ function AddCategory({onCategoriesAdded}) {
                 <div>
                     <button
                         type="submit"
-                        className="inline-flex items-center justify-center gap-2 bg-black text-white font-semibold py-3 px-5 rounded-md hover:bg-black/95 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 cursor-pointer"
+                        className="inline-flex items-center justify-center gap-2 bg-black text-white font-semibold py-3 px-5 rounded-md hover:bg-black/95 focus:outline-none hover:ring-2 hover:ring-offset-2 hover:ring-gray-900 cursor-pointer transition-all duration-200 active:scale-95"
                     >
                         <span>Create Budget</span>
                         <svg
