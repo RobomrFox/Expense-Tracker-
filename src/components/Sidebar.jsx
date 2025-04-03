@@ -1,6 +1,8 @@
 import Settings from "./Settings";
 import { useState } from "react";
 
+import { NavLink } from "react-router-dom";
+
 const Sidebar = function () {
     const [checkSettingsModal, toggleSettingsModal] = useState(false);
     const [isCollapsed, setIsCollapsed] = useState(false);
@@ -32,23 +34,38 @@ const Sidebar = function () {
                 </div>
 
                 <nav className={`${isCollapsed ? "flex justify-center flex-col" : ""} mx-2 p-1 mt-[-20rem]`}>
-                    <div className={`flex items-center ${isCollapsed ? "justify-center" : "justify-start"} gap-2 hover:bg-purple-500/10 rounded p-1 cursor-pointer`}>
+                    <NavLink 
+                    to="/" end
+                    className={({ isActive }) =>
+                        `flex items-center ${isCollapsed ? "justify-center" : "justify-start"} gap-2 hover:bg-purple-500/10 rounded p-1 cursor-pointer ${isActive ? "bg-purple-500/10" : ""}`
+                      }
+                      >
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="size-6">
                             <path stroke-linecap="round" strokeLinejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
                         </svg>
                         {!isCollapsed && <span className="text-xl">Home</span>}
-                    </div>
+                    </NavLink>
 
-                    <div className={`flex items-center ${isCollapsed ? "justify-center" : "justify-start"} gap-2 hover:bg-purple-500/10 rounded p-1 cursor-pointer`}>
+                    <NavLink 
+                    to='/categories' end
+                    className={({ isActive }) =>
+                        `flex items-center ${isCollapsed ? "justify-center" : "justify-start"} gap-2 hover:bg-purple-500/10 rounded p-1 cursor-pointer ${isActive ? "bg-purple-500/10" : ""}`
+                      }
+                      >
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M9.568 3H5.25A2.25 2.25 0 0 0 3 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 0 0 5.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 0 0 9.568 3Z" />
                             <path strokeLinecap="round" strokeLinejoin="round" d="M6 6h.008v.008H6V6Z" />
                         </svg>
 
                         {!isCollapsed && <span className="text-xl">Categories</span>}
-                    </div>
+                    </NavLink>
 
-                    <div className={`flex items-center ${isCollapsed ? "justify-center" : "justify-start"} gap-2 hover:bg-purple-500/10 rounded p-1 cursor-pointer`}>
+                    <NavLink 
+                    to="/budget" end
+                    className={({ isActive }) =>
+                        `flex items-center ${isCollapsed ? "justify-center" : "justify-start"} gap-2 hover:bg-purple-500/10 rounded p-1 cursor-pointer ${isActive ? "bg-purple-500/10" : ""}`
+                      }
+                      >
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 6a7.5 7.5 0 1 0 7.5 7.5h-7.5V6Z" />
                             <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 10.5H21A7.5 7.5 0 0 0 13.5 3v7.5Z" />
@@ -56,15 +73,20 @@ const Sidebar = function () {
 
 
                         {!isCollapsed && <span className="text-xl">Budget</span>}
-                    </div>
+                    </NavLink>
 
-                    <div className={`flex items-center ${isCollapsed ? "justify-center" : "justify-start"} gap-2 hover:bg-purple-500/10 rounded p-1 cursor-pointer`}>
+                    <NavLink 
+                    to="/transactions" end
+                    className={({ isActive }) =>
+                        `flex items-center ${isCollapsed ? "justify-center" : "justify-start"} gap-2 hover:bg-purple-500/10 rounded p-1 cursor-pointer ${isActive ? "bg-purple-500/10" : ""}`
+                      }
+                      >
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                             <path strokeLinecap="round" strokeLinejoin="round" d="m9 13.5 3 3m0 0 3-3m-3 3v-6m1.06-4.19-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z" />
                         </svg>
 
                         {!isCollapsed && <span className="text-xl">Transaction</span>}
-                    </div>
+                    </NavLink>
 
                     <hr className="my-2 border-purple-800/20" />
 

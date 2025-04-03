@@ -7,6 +7,9 @@ import ExpenseRecords from "./components/ExpenseRecords";
 import LoginPage from "./pages/Login";
 import RegisterPage from './pages/Register';
 import ProtectedRoutes from "./components/ProtectedRoutes";
+import TransactionPage from "./pages/transaction";
+import BudgetPage from "./pages/budget";
+import CategoriesPage from "./pages/categories";
 
 // Layout for permanent Sidebar
 const Layout = () => {
@@ -40,6 +43,18 @@ const router = createBrowserRouter([
         index: true,
         element: <Home />
       },
+      {
+        path: "transactions",
+        element: <TransactionPage />
+      },
+      {
+        path: "budget",
+        element: <BudgetPage />
+      },
+      {
+        path: "categories",
+        element: <CategoriesPage />
+      }
       // You can add additional child routes here if needed
       // For example:
       // {

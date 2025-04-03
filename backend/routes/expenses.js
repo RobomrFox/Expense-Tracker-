@@ -75,4 +75,20 @@ router.delete('/:id', async (req, res) => {
     })
 })
 
+router.post('/:id', async (req, res) =>  {
+
+    const id = req.params.id;
+
+    if (!req.session || !req.session.user || !req.session.user.id) {
+        return res.status(401).json({
+            error: "Authentication Required."
+        })
+    }
+
+    const userId = req.session.user.id;
+
+    const existingExpense = await Expense.find
+
+})
+
 export default router;
