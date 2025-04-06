@@ -45,6 +45,7 @@ const ProtectedRoutes = ({children}) => {
     }, [isLoading, isAuthenticated]);
 
 
+    //very very important without it, there is nothing on the screen
     if (isLoading) {
         return(
             <div>

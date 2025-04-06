@@ -1,5 +1,6 @@
 import express from 'express';
 import Expense from '../models/Expense.js';
+import { Parser } from 'json2csv';
 
 const router = express.Router();
 
@@ -90,5 +91,24 @@ router.post('/:id', async (req, res) =>  {
     const existingExpense = await Expense.find
 
 })
+
+
+
+router.post("/download", async (req, res) => {
+    if (!req.session || !req.session.user || !req.session.user.id) {
+      return res.status(401).json({ error: "Authentication Required." });
+    }
+    try {
+      const filteredData = req.body.expenses;
+      const fields = ["name", "category", "createdAt", "amount"];
+      const parser = new Parser({ fields });
+      const csv = parser.parse(filteredData);
+      res.setHeader("Content-Type", "text/csv");
+      res.setHeader("Content-Disposition", "attachment; filename=filtered_expenses.csv");
+      return res.send(csv);
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
+    }
+  });
 
 export default router;
