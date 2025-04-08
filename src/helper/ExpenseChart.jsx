@@ -1,4 +1,4 @@
-// src/components/ExpenseChart.jsx
+
 import React, { useState } from "react";
 import {
   LineChart,
@@ -49,10 +49,7 @@ export default function ExpenseChart() {
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig} className="w-full">
-          {/* 
-            Wrap ResponsiveContainer in a div with width:100% and a fixed height.
-            ResponsiveContainer will fill the width and height of the parent div.
-          */}
+         
           <div className="w-full" style={{ height: 300 }}>
             <ResponsiveContainer>
               <LineChart data={data} margin={{ left: 12, right: 12 }}>
@@ -79,10 +76,7 @@ export default function ExpenseChart() {
       </CardContent>
       <CardFooter className="flex-col items-start gap-2 text-sm">
         <div className="flex gap-2 font-medium leading-none">
-          Trending up by 3.8% this month <TrendingUp className="h-4 w-4" />
-        </div>
-        <div className="leading-none text-muted-foreground">
-          Dynamic daily expense calculation for the month.
+          Expenses higher than 4.5% than last month <TrendingUp className="h-4 w-4" />
         </div>
       </CardFooter>
     </Card>

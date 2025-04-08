@@ -1,11 +1,14 @@
 import Settings from "./Settings";
 import { useState } from "react";
 
-import { NavLink } from "react-router-dom";
+import { Navigate, NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Sidebar = function () {
     const [checkSettingsModal, toggleSettingsModal] = useState(false);
     const [isCollapsed, setIsCollapsed] = useState(false);
+    const navigate = useNavigate();
     const name = "Avi";
 
     function closeToggleSettingsModal() {
@@ -103,7 +106,27 @@ const Sidebar = function () {
 
                 <button
                     type="button"
-                    className={`inline-flex items-center justify-center ${isCollapsed ? "px-2" : "gap-2 px-5 mx-auto w-full max-w-[90%]"} bg-black mb-6 text-white font-semibold py-2 rounded-md hover:bg-black/95 focus:outline-none hover:ring-2 hover:ring-offset-2 hover:ring-gray-900 cursor-pointer transition-all duration-200 active:scale-95`}
+                    onClick={async (e) => {
+                        e.preventDefault();
+
+                        const response = await fetch('http://localhost:3000/auth/logout', {
+                            method: "POST", 
+                            credentials: 'include', 
+                            headers: {'Content-Type': 'application/json'},
+                        })
+
+
+                        const data = await response.json();
+
+                        if (response.ok) {
+                            toast.success('Logged out successfully!')
+                            navigate('/login');
+                        } else {
+                            toast.error(data.error || 'Loged Out Failed')
+                        }
+                        
+                    }}
+                    className={`inline-flex items-center justify-center ${isCollapsed ? "px-2 mx-2" : "gap-2 px-5 mx-auto w-full max-w-[90%]"} bg-black mb-6 text-white font-semibold py-2 rounded-md hover:bg-black/95 focus:outline-none hover:ring-2 hover:ring-offset-2 hover:ring-gray-900 cursor-pointer transition-all duration-200 active:scale-95`}
                 >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"

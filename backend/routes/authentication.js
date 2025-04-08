@@ -127,4 +127,29 @@ router.get('/status', async (req, res) => {
 });
 
 
+router.post('/logout', (req, res) => {
+    const session = req.session;
+
+    if (!session || !session.user || !session.user.id) {
+        return res.status(401).json({
+            error: "Not authorized. No active session.",
+        });
+    } else {
+        session.destroy((err) => {
+            if (err) {
+                console.error("Session destruction error:", err);
+                return res.status(500).json({
+                    error: "Could not log out, please try again.",
+                });
+            }
+
+            res.clearCookie('connect.sid'); // Replace 'connect.sid' if needed
+            return res.status(200).json({
+                msg: "Logged Out Successfully",
+            });
+        });
+    }
+});
+
+
 export default router;
